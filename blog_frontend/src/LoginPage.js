@@ -18,7 +18,7 @@ const LoginPage = (props) => {
   }
 
   const loginUser = () => {
-    fetch('http://localhost:8080/users/login', {
+    fetch('/users/login', {
       method: 'POST',
       body: JSON.stringify({
         username: values.username,

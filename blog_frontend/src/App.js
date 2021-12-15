@@ -15,10 +15,10 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(0)
 
   const fetchBlogData = () => {
-    fetch(`http://localhost:8080/users`)
+    fetch(`/users`)
     .then((res) => res.json())
     .then((res) => setUsers(res))
-    .then(fetch(`http://localhost:8080/posts`)
+    .then(fetch(`/posts`)
     .then((res) => res.json())
     .then((res) => setPosts(res)))
   }
@@ -26,7 +26,7 @@ const App = () => {
   useEffect(() => fetchBlogData(), [])
 
   const handleSubmitPost = (values) => {
-    fetch('http://localhost:8080/posts', {
+    fetch('/posts', {
       method: 'POST',
       body: JSON.stringify({
         userid: currentUser,
@@ -40,13 +40,11 @@ const App = () => {
   }
 
   const handleEditPost = (values) => {
-    fetch(`http://localhost:8080/posts/${detail.id}`, {
+    fetch(`/posts/${detail.id}`, {
       method: 'PUT',
       body: JSON.stringify({
-        // userid: currentUser,
         title: values.title,
         text: values.text,
-        // created_date: new Date().toISOString(),
       }),
       headers: {'Content-Type': 'application/json'}
     })
@@ -54,7 +52,7 @@ const App = () => {
   }
 
   const handleDeletePost = () => {
-    fetch(`http://localhost:8080/posts/${detail.id}`, {
+    fetch(`/posts/${detail.id}`, {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'}
     })
@@ -62,7 +60,7 @@ const App = () => {
   }
 
   const handleRegisterUser = (values) => {
-    fetch('http://localhost:8080/users', {
+    fetch('/users', {
       method: 'POST',
       body: JSON.stringify({
         first: values.first,
